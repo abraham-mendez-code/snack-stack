@@ -52,7 +52,33 @@ public class Order implements Valuable {
 
     }
 
+// GETTER METHODS
 
+    // this method returns all sandwiches in the order
+    public List<Valuable> getSandwiches() {
+
+        return items.stream()
+                .filter(item -> item instanceof Sandwich)
+                .toList();
+
+    }
+
+    // this method returns all drinks in the order
+    public List<Valuable> getDrinks() {
+
+        return items.stream()
+                .filter(item -> item instanceof Drink)
+                .toList();
+    }
+
+    // this method returns all chips in the order
+    public List<Valuable> getChips() {
+
+        return items.stream()
+                .filter(item -> item instanceof Chips)
+                .toList();
+
+    }
 
 
 }

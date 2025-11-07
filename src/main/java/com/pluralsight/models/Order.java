@@ -6,46 +6,52 @@ import java.util.List;
 public class Order implements Valuable {
 
     // class attributes
-    List<Valuable> items;
+    List<Valuable> sandwiches;
+    List<Valuable> drinks;
+    List<Valuable> chips;
     double total;
 
     // constructor
     public Order (String name) {
 
-        this.items = new ArrayList<>();
+        this.sandwiches = new ArrayList<>();
+        this.drinks = new ArrayList<>();
+        this.chips = new ArrayList<>();
         this.total = 0;
 
     }
 
     // this method adds a sandwich to the order
     public void addSandwich (Valuable sandwich) {
-        items.add(sandwich);
+        sandwiches.add(sandwich);
     }
 
     // this method adds a drink to the order
     public void addDrink (Valuable drink) {
-        items.add(drink);
+        drinks.add(drink);
     }
 
     // this method adds chips to the order
-    public void addChips(Valuable chips) {
-        items.add(chips);
+    public void addChips(Valuable chip) {
+        this.chips.add(chip);
     }
 
-    // this method removes an item from the order
-    public void remove (int index) {
-
-        items.remove(index);
-
-    }
 
     // get the order total
     @Override
     public double getValue() {
 
         // Sum the value of each item in an order
-        total = items.stream()
+        total += sandwiches.stream()
                     .mapToDouble(Valuable::getValue)
+                .sum();
+
+        total += drinks.stream()
+                .mapToDouble(Valuable::getValue)
+                .sum();
+
+        total += chips.stream()
+                .mapToDouble(Valuable::getValue)
                 .sum();
 
         return total;
@@ -57,26 +63,20 @@ public class Order implements Valuable {
     // this method returns all sandwiches in the order
     public List<Valuable> getSandwiches() {
 
-        return items.stream()
-                .filter(item -> item instanceof Sandwich)
-                .toList();
+        return sandwiches;
 
     }
 
     // this method returns all drinks in the order
     public List<Valuable> getDrinks() {
 
-        return items.stream()
-                .filter(item -> item instanceof Drink)
-                .toList();
+        return drinks;
     }
 
     // this method returns all chips in the order
     public List<Valuable> getChips() {
 
-        return items.stream()
-                .filter(item -> item instanceof Chips)
-                .toList();
+        return chips;
 
     }
 

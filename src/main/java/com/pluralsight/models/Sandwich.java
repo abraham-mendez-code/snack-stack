@@ -19,7 +19,9 @@ public class Sandwich implements Valuable{
     private double basePrice;
 
     // pricing rules
+    private static final double BASE_MEAT_COST = 1.00;
     private static final double EXTRA_MEAT_COST = .50;
+    private static final double BASE_CHEESE_COST = 0.75;
     private static final double EXTRA_CHEESE_COST = 0.30;
 
     // constructor
@@ -68,10 +70,41 @@ public class Sandwich implements Valuable{
         sauces.add(sauce);
     }
 
+
+
     @Override
     public double getValue() {
-        
+        /*
+        MEATS Pricing
+            Type 	    4" 	    8" 	    12"
+            Steak 	    $1.00 	$2.00 	$3.00
+            Ham 	    $1.00 	$2.00 	$3.00
+            Salami 	    $1.00 	$2.00 	$3.00
+            Roast Beef 	$1.00 	$2.00 	$3.00
+            Chicken 	$1.00 	$2.00 	$3.00
+            Bacon 	    $1.00 	$2.00 	$3.00
+            Extra Meat 	$0.50 	$1.00 	$1.50
+         */
 
-        return 0;
+        double total = basePrice;
+        double multiplier = size / 4; // e.g., 8" → 2.0, 12" → 3.0
+
+        // Meat pricing
+        if (!meats.isEmpty()) {
+            total += BASE_MEAT_COST * multiplier; // single meat
+            if (meats.size() > 1) {
+                total += (meats.size() - 1) * EXTRA_MEAT_COST * multiplier; // extra meats
+            }
+        }
+
+        // Cheese pricing
+        if (!cheeses.isEmpty()) {
+            total += BASE_CHEESE_COST * multiplier; // single cheese
+            if (cheeses.size() > 1) {
+                total += (cheeses.size() - 1) * EXTRA_CHEESE_COST * multiplier; // extra cheeses
+            }
+        }
+
+        return total;
     }
 }

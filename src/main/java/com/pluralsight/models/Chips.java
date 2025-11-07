@@ -6,7 +6,7 @@ public class Chips implements Valuable{
     private final double BASE_PRICE = 1.50;
 
     // constructor
-    public Chips() {};
+    public Chips() {}
 
     @Override
     public double getValue() {

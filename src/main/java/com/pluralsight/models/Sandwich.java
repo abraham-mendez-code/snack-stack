@@ -23,6 +23,7 @@ public class Sandwich implements Valuable{
     private static final double EXTRA_MEAT_COST = .50;
     private static final double BASE_CHEESE_COST = 0.75;
     private static final double EXTRA_CHEESE_COST = 0.30;
+    private static final double TOASTED_COST = 0.0;
 
     // constructor
     public Sandwich (String bread, int size, boolean isToasted) {
@@ -70,7 +71,28 @@ public class Sandwich implements Valuable{
         sauces.add(sauce);
     }
 
+    // this method returns a string with all sandwich details and price
+    public String getSummary() {
 
+        return String.format("""
+                %din %s Sandwich%33s$%.02f
+                /tToasted %s
+                /t[%s]
+                /t[%s]
+                /t[%s]
+                /t[%s]
+                """, this.size,
+                this.bread,
+                "", // padding string
+                getValue(),
+                (isToasted == true ? "YES" : "NO"),
+                TOASTED_COST,
+                meats,
+                cheeses,
+                toppings,
+                sauces);
+
+    }
 
     @Override
     public double getValue() {

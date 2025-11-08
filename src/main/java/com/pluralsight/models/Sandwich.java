@@ -12,7 +12,7 @@ public class Sandwich implements Valuable{
     private List<MeatSelection> meats;
     private List<CheeseSelection> cheeses;
     private List<ToppingType> toppings;
-    private List<String> sauces;
+    private List<SauceType> sauces;
 
     //
     protected BreadType breadType;
@@ -53,7 +53,7 @@ public class Sandwich implements Valuable{
     }
 
     // this method adds a sauce to the sauces list
-    public void addSauce (String sauce) {
+    public void addSauce (SauceType sauce) {
         sauces.add(sauce);
     }
 

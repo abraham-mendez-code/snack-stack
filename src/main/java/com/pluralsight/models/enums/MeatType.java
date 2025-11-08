@@ -6,24 +6,29 @@ import java.util.Map;
 public enum MeatType {
 
     // STANDARD SINGLE MEAT PRICES
-    STEAK(Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
-    HAM(Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
-    SALAMI(Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
-    ROAST_BEEF(Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
-    CHICKEN(Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
-    BACON(Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
+    STEAK("Steak", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
+    HAM("Ham", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
+    SALAMI("Salami", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
+    ROAST_BEEF("Roast Beef", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
+    CHICKEN("Chicken", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
+    BACON("Bacon", Map.of(4, 1.00, 8, 2.00, 12, 3.00));
 
-    // EXTRA MEAT PRICES
-    EXTRA_MEAT(Map.of(4, .50, 8, 1.00, 12, 1.50));
 
+    private final String displayName;
     private final Map<Integer, Double> priceBySize;
 
-    MeatType(Map<Integer, Double> priceBySize) {
+    MeatType(String displayName, Map<Integer, Double> priceBySize) {
+        this.displayName = displayName;
         this.priceBySize = priceBySize;
     }
 
     public double getPriceForSize(int size) {
         return priceBySize.getOrDefault(size, 0.0);
+    }
+
+    @Override
+    public String toString(){
+        return displayName;
     }
 
 }

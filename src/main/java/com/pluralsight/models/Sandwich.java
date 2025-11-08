@@ -1,9 +1,6 @@
 package com.pluralsight.models;
 
-import com.pluralsight.models.enums.BreadType;
-import com.pluralsight.models.enums.CheeseType;
-import com.pluralsight.models.enums.MeatType;
-import com.pluralsight.models.enums.ToppingTypes;
+import com.pluralsight.models.enums.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +9,9 @@ public class Sandwich implements Valuable{
 
     // CLASS ATTRIBUTES
     // Additions List
-    private List<MeatType> meats;
-    private List<CheeseType> cheeses;
-    private List<ToppingTypes> toppings;
+    private List<MeatSelection> meats;
+    private List<CheeseSelection> cheeses;
+    private List<ToppingType> toppings;
     private List<String> sauces;
 
     //
@@ -42,24 +39,16 @@ public class Sandwich implements Valuable{
 
     // this method adds meat to the meats List
     public void addMeat(MeatType meatType, boolean isExtra) {
-        meats.add(meatType);
-
-        if (isExtra) {
-            meats.add(MeatType.EXTRA_MEAT);
-        }
+        meats.add(new MeatSelection(meatType, isExtra));
     }
 
     // this method adds cheese to the cheeses List
     public void addCheese(CheeseType cheeseType, boolean isExtra) {
-        cheeses.add(cheeseType);
-
-        if (isExtra) {
-            cheeses.add(CheeseType.EXTRA_CHEESE);
-        }
+        cheeses.add(new CheeseSelection(cheeseType, isExtra));
     }
 
     // this method adds a topping to the toppings List
-    public void addTopping (ToppingTypes toppingType) {
+    public void addTopping (ToppingType toppingType) {
         toppings.add(toppingType);
     }
 
@@ -98,12 +87,12 @@ public class Sandwich implements Valuable{
 
         // Meat pricing
         total += meats.stream()
-                .mapToDouble(m -> m.getPriceForSize(size))
+                .mapToDouble(m -> m.getPrice(size))
                 .sum();
 
         // Cheese pricing
         total += cheeses.stream()
-                .mapToDouble(m -> m.getPriceForSize(size))
+                .mapToDouble(c -> c.getPrice(size))
                 .sum();
 
         return total;

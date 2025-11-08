@@ -59,7 +59,16 @@ public class Order implements Valuable {
 
     }
 
-    
+    // this method returns a string with all order details and price
+    public String getSummary() {
+
+        StringBuilder sb = new StringBuilder(); // create a new StringBuilder
+
+        sandwiches.forEach(sandwich -> sb.append( sandwich.getSummary()) ); // add the Summary of each Sandwich in the order to the StringBuilder
+
+        return sb.toString();
+
+    }
 
     // this method calculates the order total and returns its value
     @Override

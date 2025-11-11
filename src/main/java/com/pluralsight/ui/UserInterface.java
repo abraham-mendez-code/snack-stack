@@ -196,5 +196,39 @@ public class UserInterface {
 
         return breadType;
     }
+
+    // this method prompts the user for a size
+    public int promptForSize() {
+
+        int size = 0;
+        boolean menuRunning = true;
+
+        while (menuRunning) {
+            char input = InputParser.getAString("""
+                    (s)mall
+                    (m)edium
+                    (l)arge
+                    Enter a size:/s""").toLowerCase().charAt(0);
+
+            menuRunning = false;
+
+            switch (input) {
+                case 's':
+                    size = 1;
+                    break;
+                case 'm':
+                    size = 2;
+                    break;
+                case 'l':
+                    size = 3;
+                    break;
+                default:
+                    System.out.println("Invalid selection");
+                    menuRunning = true;
+            }
+        }
+
+        return size;
+    }
 }
 

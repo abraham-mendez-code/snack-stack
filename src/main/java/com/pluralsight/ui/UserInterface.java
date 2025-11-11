@@ -4,6 +4,7 @@ import com.pluralsight.models.Chips;
 import com.pluralsight.models.Drink;
 import com.pluralsight.models.Order;
 import com.pluralsight.models.Sandwich;
+import com.pluralsight.util.InputParser;
 
 import java.util.Scanner;
 
@@ -13,14 +14,17 @@ public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
 
     // CONSTRUCTOR
-    public UserInterface() {};
+    public UserInterface() {
+    }
+
+    ;
 
     // MENUS
 
     // this method displays the home screen
     public void showHomeScreen() {
         String message = """    
-           
+                
                 >>========================================================<<
                 || ____                   _      ____  _             _    ||
                 ||/ ___| _ __   __ _  ___| | __ / ___|| |_ __ _  ___| | __||
@@ -36,27 +40,118 @@ public class UserInterface {
         boolean menuRunning = true;
 
         while (menuRunning) {
-            try {
-                int command = Integer.parseInt(scanner.nextLine());
 
-                switch(command) {
-                    case 1:
-                        //showOrderMenu();
-                        break;
-                    case 0:
-                        menuRunning = false;
-                        break;
-                    default:
-                        System.out.println("Invalid selection");
-                }
+            int command = InputParser.getAInteger(message);
 
+            switch (command) {
+                case 1:
+                    showOrderMenu();
+                    break;
+                case 0:
+                    menuRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid selection");
             }
-            catch (NumberFormatException e) {
-                System.out.println("Only numbers allowed");
-            }
+
 
         }
     }
 
+    // this menu displays the order menu
+    public void showOrderMenu() {
+        String message = """        
+                
+                >>===========================<<
+                ||  ___          _           ||
+                || / _ \\ _ __ __| | ___ _ __ ||
+                ||| | | | '__/ _` |/ _ \\ '__|||
+                ||| |_| | | | (_| |  __/ |   ||
+                || \\___/|_|  \\__,_|\\___|_|   ||
+                >>===========================<<
+                
+                1) Add Sandwich
+                2) Add Drink
+                3) Add Chips
+                4) Checkout
+                0) Cancel Order
+                Enter a command:/s""";
+        boolean menuRunning = true;
+        Order order = new Order("");
 
+        while (menuRunning) {
+            int command = InputParser.getAInteger(message);
+
+            switch (command) {
+                case 1:
+                    boolean addSandwich = true;
+
+                    while (addSandwich) {
+                        // make a new sandwich
+                       // Sandwich sandwich = new Sandwich(promptForBreadType(),
+                               // promptForSize(),
+                              //  promptForToasted());
+
+                        // get the toppings
+                        //promptForMeats(sandwich);
+                        //promptForCheeses(sandwich);
+                        //promptForToppings(sandwich);
+                        //promptForSauces(sandwich);
+
+                        //order.addSandwich(sandwich); // add the sandwich to the order
+
+
+                        String input = InputParser.getAString("Would you like to add another Sandwich(y for yes)? ");
+
+                        if (input.equalsIgnoreCase("y") || input.contains("yes"))
+                            continue; // start next Sandwich addition
+
+                        addSandwich = false; // otherwise
+                    }
+                    break;
+                case 2:
+                    boolean addDrink = true;
+
+                    while (addDrink) {
+                        // prompt for size, add a drink, prompt for additional drinks
+                        //Drink drink = new Drink(promptForSize());
+                        //order.addDrink(drink);
+
+                        String input = InputParser.getAString("Would you like to add another drink? ");
+
+                        if (input.equalsIgnoreCase("y") || input.contains("yes"))
+                            continue; // start next addition
+
+                        addDrink = false; // otherwise
+                    }
+                    break;
+                case 3:
+                    boolean addChips = true;
+
+                    while (addChips) {
+                        // add chips prompt for additional chips
+                        Chips chips = new Chips();
+                        order.addChips(chips);
+
+                        String input = InputParser.getAString("Would you like to add more chips? ");
+
+                        if (input.equalsIgnoreCase("y") || input.contains("yes"))
+                            continue; // start next addition
+
+                        addChips = false; // otherwise
+                    }
+                    break;
+                case 4:
+                    //checkOut();
+                    break;
+                case 0:
+                    menuRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid selection");
+            }
+        }
+
+    }
 }
+

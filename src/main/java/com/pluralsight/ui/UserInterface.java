@@ -4,6 +4,7 @@ import com.pluralsight.models.Chips;
 import com.pluralsight.models.Drink;
 import com.pluralsight.models.Order;
 import com.pluralsight.models.Sandwich;
+import com.pluralsight.models.enums.BreadType;
 import com.pluralsight.util.InputParser;
 
 import java.util.Scanner;
@@ -88,9 +89,9 @@ public class UserInterface {
 
                     while (addSandwich) {
                         // make a new sandwich
-                       // Sandwich sandwich = new Sandwich(promptForBreadType(),
-                               // promptForSize(),
-                              //  promptForToasted());
+                        //Sandwich sandwich = new Sandwich(promptForBreadType(),
+                                //promptForSize(),
+                                //promptForToasted());
 
                         // get the toppings
                         //promptForMeats(sandwich);
@@ -152,6 +153,48 @@ public class UserInterface {
             }
         }
 
+    }
+
+    // this method prompts the user for a bread type
+    public BreadType promptForBreadType() {
+        int command = InputParser.getAInteger("""
+                Bread Selection:
+                1) White Bread
+                2) Wheat Bread
+                3) Rye Bread
+                4) Wrap
+                Enter Bread Type:/s""");
+
+        BreadType breadType = null; // initialize breadType
+        boolean menuRunning = true;
+
+        while (menuRunning) {
+            switch (command) {
+                case 1:
+                    breadType = BreadType.WHITE;
+                    break;
+                case 2:
+                    breadType = BreadType.WHEAT;
+                    break;
+                case 3:
+                    breadType = BreadType.RYE;
+                    break;
+                case 4:
+                    breadType = BreadType.WRAP;
+                    break;
+                default:
+                    System.out.println("Invalid selection");
+                    break;
+            }
+            if (breadType != null) {
+                menuRunning = false;
+            }
+            else {
+                System.out.println("Bread Type is null!");
+            }
+        }
+
+        return breadType;
     }
 }
 

@@ -152,12 +152,17 @@ public class UserInterface {
     // this method prompts the user for a bread type
     public BreadType promptForBreadType() {
         int command = InputParser.getAInteger("""
-                Bread Selection:
-                1) White Bread
-                2) Wheat Bread
-                3) Rye Bread
-                4) Wrap
-                Enter Bread Type:\s""");
+                
+                +----------------+-------+-------+-------+
+                | Bread Type     |  4"   |  8"   | 12"  |
+                +----------------+-------+-------+-------+
+                | White Bread    | $5.50 | $7.00 | $8.50 |
+                | Wheat Bread    | $5.50 | $7.00 | $8.50 |
+                | Rye Bread      | $5.50 | $7.00 | $8.50 |
+                | Wrap           | $5.50 | $7.00 | $8.50 |
+                +----------------+-------+-------+-------+
+                
+                Enter your Bread selection:\s""");
 
         BreadType breadType = null; // initialize breadType
         boolean menuRunning = true;
@@ -196,24 +201,33 @@ public class UserInterface {
 
         int size = 0;
         boolean menuRunning = true;
+        String message = """
+                    
+                    +--------------------+
+                    |   Fountain Drink   |
+                    +--------+-----------+
+                    | Size   | Price     |
+                    +--------+-----------+
+                    | Small  | $2.00     |
+                    | Medium | $2.50     |
+                    | Large  | $3.00     |
+                    +--------+-----------+
+                    
+                    Enter your drink size:\s""";
 
         while (menuRunning) {
-            char input = InputParser.getAString("""
-                    (s)mall
-                    (m)edium
-                    (l)arge
-                    Enter a size:\s""").toLowerCase().charAt(0);
+            String input = InputParser.getAString(message).toLowerCase();
 
             menuRunning = false;
 
             switch (input) {
-                case 's':
+                case "small":
                     size = 1;
                     break;
-                case 'm':
+                case "medium":
                     size = 2;
                     break;
-                case 'l':
+                case "large":
                     size = 3;
                     break;
                 default:
@@ -245,6 +259,7 @@ public class UserInterface {
         boolean addMeat = true;
 
         String message = """
+                
                 +-------------+-------+-------+-------+
                 | Type        |  4"   |  8"   | 12"  |
                 +-------------+-------+-------+-------+
@@ -305,6 +320,7 @@ public class UserInterface {
         boolean addCheese = true;
 
         String message = """
+                
                 +---------------+-------+-------+-------+
                 | Type          |  4"   |  8"   | 12"  |
                 +---------------+-------+-------+-------+
@@ -355,19 +371,20 @@ public class UserInterface {
 
         boolean addTopping = true;
         String message = """
-                +------------------+-------------------+
-                |     Toppings     |       Price       |
-                +------------------+-------------------+
-                | Lettuce          | Included          |
-                | Peppers          | Included          |
-                | Onions           | Included          |
-                | Tomatoes         | Included          |
-                | Jalapeños        | Included          |
-                | Cucumbers        | Included          |
-                | Pickles          | Included          |
-                | Guacamole        | Included          |
-                | Mushrooms        | Included          |
-                +------------------+-------------------+
+                
+                +------------------+
+                |     Toppings     |
+                +------------------+
+                | Lettuce          |
+                | Peppers          |
+                | Onions           |
+                | Tomatoes         |
+                | Jalapeños        |
+                | Cucumbers        |
+                | Pickles          |
+                | Guacamole        |
+                | Mushrooms        |
+                +------------------+
                 
                 Enter your topping selection(none for no toppings):\s""";
 
@@ -424,16 +441,17 @@ public class UserInterface {
 
         boolean addSauce = true;
         String message = """
-                +------------------+-------------------+
-                |      Sauces      |      Price        |
-                +------------------+-------------------+
-                | Mayo             | Included          |
-                | Mustard          | Included          |
-                | Ketchup          | Included          |
-                | Ranch            | Included          |
-                | Thousand Island  | Included          |
-                | Vinaigrette      | Included          |
-                +------------------+-------------------+
+                
+                +------------------+
+                |      Sauces      |
+                +------------------+
+                | Mayo             |
+                | Mustard          |
+                | Ketchup          |
+                | Ranch            |
+                | Thousand Island  |
+                | Vinaigrette      |
+                +------------------+
                 
                 Enter your sauce selection (none for no sauce):\s""";
 

@@ -8,4 +8,6 @@ public interface Valuable {
 
     double getValue();
 
+    String getDescription();
+
 }

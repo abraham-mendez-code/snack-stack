@@ -139,7 +139,7 @@ public class UserInterface {
                     }
                     break;
                 case 4:
-                    //checkOut();
+                    processCheckoutRequest(order);
                     break;
                 case 0:
                     menuRunning = false;
@@ -495,19 +495,25 @@ public class UserInterface {
     }
 
     // this method submits the users order
-    public boolean processCheckoutRequest(Order order) {
+    public void processCheckoutRequest(Order order) {
 
-        // orders must have a sandwich, a drink, or chips (cannot be empty)
-        if (!order.getSandwiches().isEmpty() || (!order.getChips().isEmpty() || !order.getDrinks().isEmpty()) ) {
-            ReceiptWriter receiptWriter = new ReceiptWriter();
-            receiptWriter.saveReceipt(order);
-            System.out.println("Order submitted successfully");
-            return true;
+        System.out.print(order.getDescription());
+
+        String input = InputParser.getAString("Would you like to submit this order(y/n)").toLowerCase(); // validate order
+
+        if (input.startsWith("y") || input.contains("yes")) { // if order validated
+
+            // orders must have a sandwich, a drink, or chips (cannot be empty)
+            if (!order.getSandwiches().isEmpty() || (!order.getChips().isEmpty() || !order.getDrinks().isEmpty())) {
+                ReceiptWriter receiptWriter = new ReceiptWriter();
+                receiptWriter.saveReceipt(order);
+                System.out.println("Order submitted successfully");
+            } else {
+                // otherwise
+                System.out.println("Error: insufficient items in cart");
+            }
         }
 
-        // otherwise
-        System.out.println("Error: insufficient items in cart");
-        return false;
     }
 }
 

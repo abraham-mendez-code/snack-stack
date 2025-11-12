@@ -22,7 +22,7 @@ public class ReceiptWriter {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter( new FileWriter(fileName) ) ) {
 
-            bufferedWriter.write(order.getSummary());
+            bufferedWriter.write(order.getDescription());
         }
         catch (IOException e) {
             System.out.println("Error writing to file ");

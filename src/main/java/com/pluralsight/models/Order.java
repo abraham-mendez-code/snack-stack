@@ -1,6 +1,7 @@
 package com.pluralsight.models;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Order implements Valuable {
@@ -60,14 +61,66 @@ public class Order implements Valuable {
     }
 
     // this method returns a string with all order details and price
-    public String getSummary() {
+    private String getSummary() {
 
-        StringBuilder sb = new StringBuilder(); // create a new StringBuilder
+        double orderTotal = 0;
+        StringBuilder summary = new StringBuilder(); // create a new StringBuilder
 
-        sandwiches.forEach(sandwich -> sb.append( sandwich.getSummary()) ); // add the Summary of each Sandwich in the order to the StringBuilder
+        // Header
+        String header = """
+                        \n+==================================================+
+                        |                    YOUR ORDER                    |
+                        +==================================================+
+                        """;
 
-        return sb.toString();
+        summary.append(header);
 
+        // Sandwiches
+        if(!this.getSandwiches().isEmpty()) {
+            sandwiches.sort(Comparator.comparingDouble(Valuable::getValue)); // sort sandwiches by price
+
+            summary.append("\nSandwiches:");
+            for (Sandwich sandwich: this.getSandwiches() ) {
+                summary.append(sandwich.getSummary());
+                orderTotal += sandwich.getValue();
+            }
+        }
+
+        // Drinks
+        if (!getDrinks().isEmpty()) {
+            summary.append("\nDrinks:\n");
+            for (Drink drink : getDrinks()) {
+                summary.append(String.format("  %-20s %10.2f%n",
+                        drink.getDescription(), drink.getValue()));
+                orderTotal += drink.getValue();
+            }
+        }
+
+        // Chips
+        if (!getChips().isEmpty()) {
+            summary.append("\nChips:\n");
+            for (Chips chip : getChips()) {
+                summary.append(String.format("  %-20s %10.2f%n",
+                        chip.getDescription(), chip.getValue()));
+                orderTotal += chip.getValue();
+            }
+        }
+
+        // Total
+        summary.append(String.format("""
+            
+            +--------------------------------------------------+
+            | %-30s %17.2f |
+            +--------------------------------------------------+
+            %n""", "TOTAL:", orderTotal));
+
+        return summary.toString();
+    }
+
+    @Override
+    public String getDescription () {
+
+        return getSummary();
     }
 
     // this method calculates the order total and returns its value

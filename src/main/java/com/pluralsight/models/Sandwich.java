@@ -5,7 +5,7 @@ import com.pluralsight.models.enums.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sandwich implements Valuable{
+public class Sandwich implements Valuable, Comparable<Valuable>{
 
     // CLASS ATTRIBUTES
     // Additions List
@@ -59,25 +59,48 @@ public class Sandwich implements Valuable{
 
     // this method returns a string with all sandwich details and price
     public String getSummary() {
+        String meatsSummary = meats.stream()
+                .map(Object::toString)
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("None");
 
-        return String.format("""
-                %din %s Sandwich%33s$%.02f
-                /tToasted %s
-                /t[%s]
-                /t[%s]
-                /t[%s]
-                /t[%s]
-                """, this.size,
-                this.breadType,
-                "", // padding string
-                getValue(),
-                (isToasted == true ? "YES" : "NO"),
-                TOASTED_COST,
+        String cheesesSummary = cheeses.stream()
+                .map(Object::toString)
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("None");
+
+        String toppingsSummary = toppings.stream()
+                .map(Object::toString)
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("None");
+
+        String saucesSummary = sauces.stream()
+                .map(Object::toString)
+                .reduce((a, b) -> a + ", " + b)
+                .orElse("None");
+
+        return String.format(
+                "  %-20s %10.2f%n" +
+                        "    Bread: %s%n" +
+                        "    Size: %d\"%n" +
+                        "    Meats: %s%n" +
+                        "    Cheeses: %s%n" +
+                        "    Toppings: %s%n" +
+                        "    Sauces: %s%n%n",
+                getDescription(), getValue(),
+                breadType,
+                size,
                 meats,
                 cheeses,
-                toppings,
-                sauces);
+                toppingsSummary,
+                saucesSummary
+        );
+    }
 
+
+    @Override
+    public String getDescription() {
+        return size + "\" " + breadType + " Sandwich";
     }
 
     @Override
@@ -96,5 +119,10 @@ public class Sandwich implements Valuable{
                 .sum();
 
         return total;
+    }
+
+    @Override
+    public int compareTo(Valuable valuable) {
+        return Double.compare(this.getValue(), valuable.getValue());
     }
 }

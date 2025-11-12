@@ -5,6 +5,7 @@ public class Drink implements Valuable {
     // CLASS ATTRIBUTES
     private int size;
     private double basePrice;
+    private final String NAME = "Fountain Drink";
 
     public Drink (int size) {
         this.size = size;
@@ -28,6 +29,18 @@ public class Drink implements Valuable {
     // this method gets the size
     public int getSize() {
         return size;
+    }
+
+    // this method returns a description of the drink
+    public String getDescription() {
+        String sizeStr = switch (size) {
+            case 1 -> "Small";
+            case 2 -> "Medium";
+            case 3 -> "Large";
+            default -> "";
+        };
+
+        return sizeStr + " " + NAME;
     }
 
     // this method gets the value

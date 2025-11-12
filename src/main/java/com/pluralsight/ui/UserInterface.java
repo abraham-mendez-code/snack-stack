@@ -2,6 +2,7 @@ package com.pluralsight.ui;
 
 import com.pluralsight.models.*;
 import com.pluralsight.models.enums.BreadType;
+import com.pluralsight.models.enums.CheeseType;
 import com.pluralsight.models.enums.MeatType;
 import com.pluralsight.util.InputParser;
 
@@ -298,10 +299,60 @@ public class UserInterface {
                 if (command.startsWith("y") || command.contains("yes"))
                     addMeat = true;
             }
-        }
 
+        }
     }
 
     // this method asks the user for cheeses they want to add to the sandwich
+    public void promptForCheeses (Sandwich sandwich) {
+
+        boolean isExtra = false;
+        boolean addCheese = true;
+
+        String message = """
+                +---------------+-------+-------+-------+
+                | Type          |  4"   |  8"   | 12"  |
+                +---------------+-------+-------+-------+
+                | American      | $0.75 | $1.50 | $2.25 |
+                | Provolone     | $0.75 | $1.50 | $2.25 |
+                | Cheddar       | $0.75 | $1.50 | $2.25 |
+                | Swiss         | $0.75 | $1.50 | $2.25 |
+                | Extra Cheese  | $0.30 | $0.60 | $0.90 |
+                +---------------+-------+-------+-------+
+                
+                Enter your cheese selection (none for no cheese):/s""";
+
+        while (addCheese) {
+            addCheese = false;
+            String input = InputParser.getAString(message).toLowerCase();
+
+            switch (input) {
+                case "american":
+                    sandwich.addCheese(CheeseType.AMERICAN, isExtra);
+                    break;
+                case "provolone":
+                    sandwich.addCheese(CheeseType.PROVOLONE, isExtra);
+                    break;
+                case "cheddar":
+                    sandwich.addCheese(CheeseType.CHEDDAR, isExtra);
+                    break;
+                case "swiss":
+                    sandwich.addCheese(CheeseType.SWISS, isExtra);
+                    break;
+                default:
+                    if (!input.equals("none")) { // check if the user doesn't want any meat
+                        System.out.println("Invalid selection");
+                        addCheese = true;
+                    }
+            }
+            if (!input.equals("none")) {
+                String command = InputParser.getAString("Would you like to add more cheese? ").toLowerCase();
+
+                if (command.startsWith("y") || command.contains("yes"))
+                    addCheese = true;
+            }
+
+        }
+    }
 }
 

@@ -3,6 +3,8 @@ package com.pluralsight.ui;
 import com.pluralsight.models.*;
 import com.pluralsight.models.enums.*;
 import com.pluralsight.util.InputParser;
+import com.pluralsight.util.ReceiptWriter;
+import jdk.management.jfr.RecordingInfo;
 
 import java.util.Scanner;
 
@@ -156,10 +158,10 @@ public class UserInterface {
                 +----------------+-------+-------+-------+
                 | Bread Type     |  4"   |  8"   | 12"  |
                 +----------------+-------+-------+-------+
-                | White Bread    | $5.50 | $7.00 | $8.50 |
-                | Wheat Bread    | $5.50 | $7.00 | $8.50 |
-                | Rye Bread      | $5.50 | $7.00 | $8.50 |
-                | Wrap           | $5.50 | $7.00 | $8.50 |
+                | 1) White Bread | $5.50 | $7.00 | $8.50 |
+                | 2) Wheat Bread | $5.50 | $7.00 | $8.50 |
+                | 3) Rye Bread   | $5.50 | $7.00 | $8.50 |
+                | 4) Wrap        | $5.50 | $7.00 | $8.50 |
                 +----------------+-------+-------+-------+
                 
                 Enter your Bread selection:\s""");
@@ -202,18 +204,16 @@ public class UserInterface {
         int size = 0;
         boolean menuRunning = true;
         String message = """
+                            
+                    +--------+
+                    | Size   |
+                    +--------+
+                    | Small  |
+                    | Medium |
+                    | Large  |
+                    +--------+
                     
-                    +--------------------+
-                    |   Fountain Drink   |
-                    +--------+-----------+
-                    | Size   | Price     |
-                    +--------+-----------+
-                    | Small  | $2.00     |
-                    | Medium | $2.50     |
-                    | Large  | $3.00     |
-                    +--------+-----------+
-                    
-                    Enter your drink size:\s""";
+                    Enter your size:\s""";
 
         while (menuRunning) {
             String input = InputParser.getAString(message).toLowerCase();
@@ -495,5 +495,19 @@ public class UserInterface {
     }
 
     // this method submits the users order
+    public boolean processCheckoutRequest(Order order) {
+
+        // orders must have a sandwich, a drink, or chips (cannot be empty)
+        if (!order.getSandwiches().isEmpty() || (!order.getChips().isEmpty() || !order.getDrinks().isEmpty()) ) {
+            ReceiptWriter receiptWriter = new ReceiptWriter();
+            receiptWriter.saveReceipt(order);
+            System.out.println("Order submitted successfully");
+            return true;
+        }
+
+        // otherwise
+        System.out.println("Error: insufficient items in cart");
+        return false;
+    }
 }
 

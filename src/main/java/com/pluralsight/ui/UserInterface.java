@@ -1,10 +1,7 @@
 package com.pluralsight.ui;
 
 import com.pluralsight.models.*;
-import com.pluralsight.models.enums.BreadType;
-import com.pluralsight.models.enums.CheeseType;
-import com.pluralsight.models.enums.MeatType;
-import com.pluralsight.models.enums.ToppingType;
+import com.pluralsight.models.enums.*;
 import com.pluralsight.util.InputParser;
 
 import java.util.Scanner;
@@ -76,7 +73,7 @@ public class UserInterface {
                 3) Add Chips
                 4) Checkout
                 0) Cancel Order
-                Enter a command:/s""";
+                Enter a command:\s""";
         boolean menuRunning = true;
         Order order = new Order("");
 
@@ -89,18 +86,15 @@ public class UserInterface {
 
                     while (addSandwich) {
                         // make a new sandwich
-                        //Sandwich sandwich = new Sandwich(promptForBreadType(),
-                                //promptForSize(),
-                                //promptForToasted());
-
+                        Sandwich sandwich = new Sandwich(promptForBreadType(),
+                                promptForSize(),
+                                promptForToasted());
                         // get the toppings
-                        //promptForMeats(sandwich);
-                        //promptForCheeses(sandwich);
-                        //promptForToppings(sandwich);
-                        //promptForSauces(sandwich);
-
-                        //order.addSandwich(sandwich); // add the sandwich to the order
-
+                        promptForMeats(sandwich);
+                        promptForCheeses(sandwich);
+                        promptForToppings(sandwich);
+                        promptForSauces(sandwich);
+                        order.addSandwich(sandwich); // add the sandwich to the order
 
                         String input = InputParser.getAString("Would you like to add another Sandwich(y for yes)? ");
 
@@ -115,8 +109,8 @@ public class UserInterface {
 
                     while (addDrink) {
                         // prompt for size, add a drink, prompt for additional drinks
-                        //Drink drink = new Drink(promptForSize());
-                        //order.addDrink(drink);
+                        Drink drink = new Drink(promptForSize());
+                        order.addDrink(drink);
 
                         String input = InputParser.getAString("Would you like to add another drink? ");
 
@@ -163,7 +157,7 @@ public class UserInterface {
                 2) Wheat Bread
                 3) Rye Bread
                 4) Wrap
-                Enter Bread Type:/s""");
+                Enter Bread Type:\s""");
 
         BreadType breadType = null; // initialize breadType
         boolean menuRunning = true;
@@ -208,7 +202,7 @@ public class UserInterface {
                     (s)mall
                     (m)edium
                     (l)arge
-                    Enter a size:/s""").toLowerCase().charAt(0);
+                    Enter a size:\s""").toLowerCase().charAt(0);
 
             menuRunning = false;
 
@@ -263,7 +257,7 @@ public class UserInterface {
                 | Extra Meat  | $0.50 | $1.00 | $1.50 |
                 +-------------+-------+-------+-------+
                 
-                Enter your Meat selection (none for no meat):/s""";
+                Enter your Meat selection (none for no meat):\s""";
 
         while (addMeat) {
             addMeat = false;
@@ -321,7 +315,7 @@ public class UserInterface {
                 | Extra Cheese  | $0.30 | $0.60 | $0.90 |
                 +---------------+-------+-------+-------+
                 
-                Enter your cheese selection (none for no cheese):/s""";
+                Enter your cheese selection (none for no cheese):\s""";
 
         while (addCheese) {
             addCheese = false;
@@ -361,22 +355,21 @@ public class UserInterface {
 
         boolean addTopping = true;
         String message = """
-                +------------------------+
-                | Regular Toppings       |
-                | (Included)             |
-                +------------------------+
-                | Lettuce                |
-                | Peppers                |
-                | Onions                 |
-                | Tomatoes               |
-                | Jalapeños              |
-                | Cucumbers              |
-                | Pickles                |
-                | Guacamole              |
-                | Mushrooms              |
-                +------------------------+
+                +------------------+-------------------+
+                |     Toppings     |       Price       |
+                +------------------+-------------------+
+                | Lettuce          | Included          |
+                | Peppers          | Included          |
+                | Onions           | Included          |
+                | Tomatoes         | Included          |
+                | Jalapeños        | Included          |
+                | Cucumbers        | Included          |
+                | Pickles          | Included          |
+                | Guacamole        | Included          |
+                | Mushrooms        | Included          |
+                +------------------+-------------------+
                 
-                Enter your topping selection(none for no toppings):/s""";
+                Enter your topping selection(none for no toppings):\s""";
 
         while (addTopping) {
             addTopping = false;
@@ -395,7 +388,7 @@ public class UserInterface {
                 case "tomatoes":
                     sandwich.addTopping(ToppingType.TOMATOES);
                     break;
-                case "jalapeños ":
+                case "jalapeños":
                     sandwich.addTopping(ToppingType.JALAPENOS);
                     break;
                 case "cucumbers":
@@ -425,5 +418,64 @@ public class UserInterface {
 
         }
     }
+
+    // this method asks the user for toppings they want to add to the sandwich
+    public void promptForSauces(Sandwich sandwich) {
+
+        boolean addSauce = true;
+        String message = """
+                +------------------+-------------------+
+                |      Sauces      |      Price        |
+                +------------------+-------------------+
+                | Mayo             | Included          |
+                | Mustard          | Included          |
+                | Ketchup          | Included          |
+                | Ranch            | Included          |
+                | Thousand Island  | Included          |
+                | Vinaigrette      | Included          |
+                +------------------+-------------------+
+                
+                Enter your sauce selection (none for no sauce):\s""";
+
+        while (addSauce) {
+            addSauce = false;
+            String input = InputParser.getAString(message).toLowerCase();
+
+            switch (input) {
+                case "mayo":
+                    sandwich.addSauce(SauceType.MAYO);
+                    break;
+                case "mustard":
+                    sandwich.addSauce(SauceType.MUSTARD);
+                    break;
+                case "ketchup":
+                    sandwich.addSauce(SauceType.KETCHUP);
+                    break;
+                case "ranch":
+                    sandwich.addSauce(SauceType.RANCH);
+                    break;
+                case "thousand island":
+                    sandwich.addSauce(SauceType.THOUSAND_ISLAND);
+                    break;
+                case "vinaigrette":
+                    sandwich.addSauce(SauceType.VINAIGRETTE);
+                    break;
+                default:
+                    if (!input.equals("none")) { // check if the user doesn't want any meat
+                        System.out.println("Invalid selection");
+                        addSauce = true;
+                    }
+            }
+            if (!input.equals("none")) {
+                String command = InputParser.getAString("Would you like to add more sauce? ").toLowerCase();
+
+                if (command.startsWith("y") || command.contains("yes"))
+                    addSauce = true;
+            }
+
+        }
+    }
+
+    // this method submits the users order
 }
 

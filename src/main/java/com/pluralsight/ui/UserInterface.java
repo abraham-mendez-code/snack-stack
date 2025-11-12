@@ -4,6 +4,7 @@ import com.pluralsight.models.*;
 import com.pluralsight.models.enums.BreadType;
 import com.pluralsight.models.enums.CheeseType;
 import com.pluralsight.models.enums.MeatType;
+import com.pluralsight.models.enums.ToppingType;
 import com.pluralsight.util.InputParser;
 
 import java.util.Scanner;
@@ -244,7 +245,7 @@ public class UserInterface {
     }
 
     // this method asks the user for meats they want to add to the sandwich
-    public void promptForMeats (Sandwich sandwich) {
+    public void promptForMeats(Sandwich sandwich) {
 
         boolean isExtra = false;
         boolean addMeat = true;
@@ -304,7 +305,7 @@ public class UserInterface {
     }
 
     // this method asks the user for cheeses they want to add to the sandwich
-    public void promptForCheeses (Sandwich sandwich) {
+    public void promptForCheeses(Sandwich sandwich) {
 
         boolean isExtra = false;
         boolean addCheese = true;
@@ -350,6 +351,76 @@ public class UserInterface {
 
                 if (command.startsWith("y") || command.contains("yes"))
                     addCheese = true;
+            }
+
+        }
+    }
+
+    // this method asks the user for toppings they want to add to the sandwich
+    public void promptForToppings(Sandwich sandwich) {
+
+        boolean addTopping = true;
+        String message = """
+                +------------------------+
+                | Regular Toppings       |
+                | (Included)             |
+                +------------------------+
+                | Lettuce                |
+                | Peppers                |
+                | Onions                 |
+                | Tomatoes               |
+                | Jalapeños              |
+                | Cucumbers              |
+                | Pickles                |
+                | Guacamole              |
+                | Mushrooms              |
+                +------------------------+
+                
+                Enter your topping selection(none for no toppings):/s""";
+
+        while (addTopping) {
+            addTopping = false;
+            String input = InputParser.getAString(message).toLowerCase();
+
+            switch (input) {
+                case "lettuce":
+                    sandwich.addTopping(ToppingType.LETTUCE);
+                    break;
+                case "peppers":
+                    sandwich.addTopping(ToppingType.PEPPERS);
+                    break;
+                case "onions":
+                    sandwich.addTopping(ToppingType.ONIONS);
+                    break;
+                case "tomatoes":
+                    sandwich.addTopping(ToppingType.TOMATOES);
+                    break;
+                case "jalapeños ":
+                    sandwich.addTopping(ToppingType.JALAPENOS);
+                    break;
+                case "cucumbers":
+                    sandwich.addTopping(ToppingType.CUCUMBERS);
+                    break;
+                case "pickles":
+                    sandwich.addTopping(ToppingType.PICKLES);
+                    break;
+                case "guacamole":
+                    sandwich.addTopping(ToppingType.GUACAMOLE);
+                    break;
+                case "mushrooms":
+                    sandwich.addTopping(ToppingType.MUSHROOMS);
+                    break;
+                default:
+                    if (!input.equals("none")) { // check if the user doesn't want any meat
+                        System.out.println("Invalid selection");
+                        addTopping = true;
+                    }
+            }
+            if (!input.equals("none")) {
+                String command = InputParser.getAString("Would you like to add more toppings? ").toLowerCase();
+
+                if (command.startsWith("y") || command.contains("yes"))
+                    addTopping = true;
             }
 
         }

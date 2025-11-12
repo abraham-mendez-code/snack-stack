@@ -5,7 +5,7 @@ public enum ToppingType {
     PEPPERS("Peppers"),
     ONIONS("Onions"),
     TOMATOES("Tomatoes"),
-    JALAPENOS("Jalapenos"),
+    JALAPENOS("Jalapeños"),
     CUCUMBERS("Cucumbers"),
     PICKLES("Pickles"),
     GUACAMOLE("Guacamole"),

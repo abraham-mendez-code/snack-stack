@@ -139,7 +139,7 @@ public class UserInterface {
                         if (input.equalsIgnoreCase("y") || input.contains("yes"))
                             continue; // start next addition
 
-                        addChips = false; // otherwise
+                        addChips = false; // otherwise end loop
                     }
                     break;
                 case 4:
@@ -229,6 +229,19 @@ public class UserInterface {
         }
 
         return size;
+    }
+
+    // this method asks the user if they want their sandwich toasted
+    public boolean promptForToasted() {
+        boolean isToasted = false;
+
+        String input = InputParser.getAString("Would you like your sandwich toasted? ");
+
+        if (input.equalsIgnoreCase("y") || input.contains("yes"))
+            isToasted = true;
+
+
+        return isToasted;
     }
 }
 

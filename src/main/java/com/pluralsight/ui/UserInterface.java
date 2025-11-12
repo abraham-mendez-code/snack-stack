@@ -1,10 +1,8 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.models.Chips;
-import com.pluralsight.models.Drink;
-import com.pluralsight.models.Order;
-import com.pluralsight.models.Sandwich;
+import com.pluralsight.models.*;
 import com.pluralsight.models.enums.BreadType;
+import com.pluralsight.models.enums.MeatType;
 import com.pluralsight.util.InputParser;
 
 import java.util.Scanner;
@@ -243,5 +241,67 @@ public class UserInterface {
 
         return isToasted;
     }
+
+    // this method asks the user for meats they want to add to the sandwich
+    public void promptForMeats (Sandwich sandwich) {
+
+        boolean isExtra = false;
+        boolean addMeat = true;
+
+        String message = """
+                +-------------+-------+-------+-------+
+                | Type        |  4"   |  8"   | 12"  |
+                +-------------+-------+-------+-------+
+                | Steak       | $1.00 | $2.00 | $3.00 |
+                | Ham         | $1.00 | $2.00 | $3.00 |
+                | Salami      | $1.00 | $2.00 | $3.00 |
+                | Roast Beef  | $1.00 | $2.00 | $3.00 |
+                | Chicken     | $1.00 | $2.00 | $3.00 |
+                | Bacon       | $1.00 | $2.00 | $3.00 |
+                | Extra Meat  | $0.50 | $1.00 | $1.50 |
+                +-------------+-------+-------+-------+
+                
+                Enter your Meat selection (none for no meat):/s""";
+
+        while (addMeat) {
+            addMeat = false;
+            String input = InputParser.getAString(message).toLowerCase();
+
+            switch (input) {
+                case "steak":
+                    sandwich.addMeat(MeatType.STEAK, isExtra);
+                    break;
+                case "ham":
+                    sandwich.addMeat(MeatType.HAM, isExtra);
+                    break;
+                case "salami":
+                    sandwich.addMeat(MeatType.SALAMI, isExtra);
+                    break;
+                case "roast beef":
+                    sandwich.addMeat(MeatType.ROAST_BEEF, isExtra);
+                    break;
+                case "chicken":
+                    sandwich.addMeat(MeatType.CHICKEN, isExtra);
+                    break;
+                case "bacon":
+                    sandwich.addMeat(MeatType.BACON, isExtra);
+                    break;
+                default:
+                    if (!input.equals("none")) { // check if the user doesn't want any meat
+                        System.out.println("Invalid selection");
+                        addMeat = true;
+                    }
+            }
+            if (!input.equals("none")) {
+                String command = InputParser.getAString("Would you like to add more meat? ").toLowerCase();
+
+                if (command.startsWith("y") || command.contains("yes"))
+                    addMeat = true;
+            }
+        }
+
+    }
+
+    // this method asks the user for cheeses they want to add to the sandwich
 }
 

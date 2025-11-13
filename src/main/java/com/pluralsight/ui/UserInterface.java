@@ -113,6 +113,7 @@ public class UserInterface {
                         // prompt for size, add a drink, prompt for additional drinks
                         Drink drink = new Drink(promptForSize());
                         order.addDrink(drink);
+                        System.out.println("Fountain Drink added to your order");
 
                         String input = InputParser.getAString("Would you like to add another drink? ");
 
@@ -126,9 +127,8 @@ public class UserInterface {
                     boolean addChips = true;
 
                     while (addChips) {
-                        // add chips prompt for additional chips
-                        Chips chips = new Chips();
-                        order.addChips(chips);
+
+                        order.addChips(promptForChip());
 
                         String input = InputParser.getAString("Would you like to add more chips? ");
 
@@ -492,6 +492,53 @@ public class UserInterface {
             }
 
         }
+    }
+
+    // this method prompts the user for chip type
+    public Chips promptForChip() {
+
+        boolean menuRunning = true;
+        Chips chip = null;
+        String message = """
+                                
+                                +------------------------+-------------------+
+                                |         Chips          |       Price       |
+                                +------------------------+-------------------+
+                                | 1) Classic             | $1.50             |
+                                | 2) Barbecue            | $1.50             |
+                                | 3) Sour Cream & Onion  | $1.50             |
+                                | 4) Salt & Vinegar      | $1.50             |
+                                | 5) Cheddar & Sour Cream| $1.50             |
+                                +------------------------+-------------------+
+                                
+                                Enter your chip selection:\s""";
+
+        while (menuRunning) {
+            int input = InputParser.getAInteger(message);
+            menuRunning = false;
+
+            switch (input) {
+                case 1:
+                    chip = new Chips(ChipType.CLASSIC);
+                    break;
+                case 2:
+                    chip = new Chips(ChipType.BARBECUE);
+                    break;
+                case 3:
+                    chip = new Chips(ChipType.SOUR_CREAM_AND_ONION);
+                    break;
+                case 4:
+                    chip = new Chips(ChipType.SALT_AND_VINEGAR);
+                    break;
+                case 5:
+                    chip = new Chips(ChipType.CHEDDAR_AND_SOUR_CREAM);
+                    break;
+                default:
+                    System.out.println("Invalid Selection");
+                    menuRunning = true;
+            }
+        }
+        return chip;
     }
 
     // this method submits the users order

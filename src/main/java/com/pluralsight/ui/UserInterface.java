@@ -19,21 +19,20 @@ public class UserInterface {
     ;
 
     // MENUS
+    public void start(){
+        showHomeScreen();
+    }
 
     // this method displays the home screen
-    public void showHomeScreen() {
+    private void showHomeScreen() {
         String message = """    
                 
-                >>========================================================<<
-                || ____                   _      ____  _             _    ||
-                ||/ ___| _ __   __ _  ___| | __ / ___|| |_ __ _  ___| | __||
-                ||\\___ \\| '_ \\ / _` |/ __| |/ / \\___ \\| __/ _` |/ __| |/ /||
-                || ___) | | | | (_| | (__|   <   ___) | || (_| | (__|   < ||
-                |||____/|_| |_|\\__,_|\\___|_|\\_\\ |____/ \\__\\__,_|\\___|_|\\_\\||
-                >>========================================================<<
-                
-                1) New Order
-                0) Exit
+                +==================================================+
+                |                    SNACK STACK                   |
+                +==================================================+
+                | 1) New Order                                     |
+                | 0) Exit                                          |
+                +==================================================+
                 Enter a command:\s""";
 
         boolean menuRunning = true;
@@ -58,22 +57,18 @@ public class UserInterface {
     }
 
     // this menu displays the order menu
-    public void showOrderMenu() {
+    private void showOrderMenu() {
         String message = """        
                 
-                >>===========================<<
-                ||  ___          _           ||
-                || / _ \\ _ __ __| | ___ _ __ ||
-                ||| | | | '__/ _` |/ _ \\ '__|||
-                ||| |_| | | | (_| |  __/ |   ||
-                || \\___/|_|  \\__,_|\\___|_|   ||
-                >>===========================<<
-                
-                1) Add Sandwich
-                2) Add Drink
-                3) Add Chips
-                4) Checkout
-                0) Cancel Order
+                +==================================================+
+                |                     YOUR ORDER                   |
+                +==================================================+
+                | 1) Add Sandwich                                  |
+                | 2) Add Drink                                     |
+                | 3) Add Chips                                     |
+                | 4) Checkout                                      |
+                | 0) Cancel Order                                  |
+                +==================================================+
                 Enter a command:\s""";
         boolean menuRunning = true;
         Order order = new Order("");
@@ -337,7 +332,7 @@ public class UserInterface {
     // FUNCTION MENUS
 
     // this method prompts the user for a bread type
-    public BreadType promptForBreadType() {
+    private BreadType promptForBreadType() {
         int command = InputParser.getAInteger("""
                 
                 +----------------+-------+-------+-------+
@@ -383,7 +378,7 @@ public class UserInterface {
     }
 
     // this method prompts the user for a size
-    public int promptForSize() {
+    private int promptForSize() {
 
         int size = 0;
         boolean menuRunning = true;
@@ -424,7 +419,7 @@ public class UserInterface {
     }
 
     // this method asks the user if they want their sandwich toasted
-    public boolean promptForToasted() {
+    private boolean promptForToasted() {
         boolean isToasted = false;
 
         String input = InputParser.getAString("Would you like your sandwich toasted? ");
@@ -437,7 +432,7 @@ public class UserInterface {
     }
 
     // this method asks the user for meats they want to add to the sandwich
-    public void promptForMeats(Sandwich sandwich) {
+    private void promptForMeats(Sandwich sandwich) {
 
         boolean isExtra = false;
         boolean addMeat = true;
@@ -499,7 +494,7 @@ public class UserInterface {
     }
 
     // this method asks the user for cheeses they want to add to the sandwich
-    public void promptForCheeses(Sandwich sandwich) {
+    private void promptForCheeses(Sandwich sandwich) {
 
         boolean isExtra = false;
         boolean addCheese = true;
@@ -552,7 +547,7 @@ public class UserInterface {
     }
 
     // this method asks the user for toppings they want to add to the sandwich
-    public void promptForToppings(Sandwich sandwich) {
+    private void promptForToppings(Sandwich sandwich) {
 
         boolean addTopping = true;
         String message = """
@@ -622,7 +617,7 @@ public class UserInterface {
     }
 
     // this method asks the user for toppings they want to add to the sandwich
-    public void promptForSauces(Sandwich sandwich) {
+    private void promptForSauces(Sandwich sandwich) {
 
         boolean addSauce = true;
         String message = """
@@ -681,7 +676,7 @@ public class UserInterface {
     }
 
     // this method prompts the user for chip type
-    public Chips promptForChip() {
+    private Chips promptForChip() {
 
         boolean menuRunning = true;
         Chips chip = null;
@@ -728,7 +723,7 @@ public class UserInterface {
     }
 
     // this method submits the users order
-    public void processCheckoutRequest(Order order) {
+    private void processCheckoutRequest(Order order) {
 
         System.out.print(order.getDescription());
 

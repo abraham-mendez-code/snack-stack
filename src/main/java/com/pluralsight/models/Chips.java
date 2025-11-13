@@ -1,22 +1,24 @@
 package com.pluralsight.models;
 
+import com.pluralsight.models.enums.ChipType;
+
 public class Chips implements Valuable{
 
     // CLASS ATTRIBUTES
-    private final double BASE_PRICE = 1.50;
-    private final String name = "Chips";
+    private ChipType type;
 
     // constructor
-    public Chips() {}
+    public Chips(ChipType type) {
+        this.type = type;
+    }
 
     @Override
     public String getDescription() {
-
-        return name;
+        return type.toString() + " Chips";
     }
 
     @Override
     public double getValue() {
-        return BASE_PRICE;
+        return type.getPrice();
     }
 }

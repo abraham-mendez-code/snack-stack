@@ -1,0 +1,135 @@
+@startuml
+title SnackStack UML Diagram
+
+skinparam classAttributeIconSize 0
+
+interface Valuable {
+    +getDescription() : String
+    +getValue() : double
+}
+
+class Sandwich {
+    -bread : BreadType
+    -size : int
+    -isToasted : boolean
+    +getValue() : double
+    +getDescription() : String
+    +getSummary() : String
+}
+
+class Drink {
+    -size : String
+    -basePrice : double
+    -name : String
+    +getDescription() : String
+    +getValue() : double
+    +getSummary() : String
+}
+
+class Chips {
+    -type : ChipType
+    +Chips(chipType : ChipType)
+    +getDescription() : String
+    +getValue() : double
+}
+
+class Order {
+    -sandwiches : List<Sandwich>
+    -drinks : List<Drink>
+    -chips : List<Chips>
+    +addSandwich(s : Sandwich)
+    +addDrink(d : Drink)
+    +addChips(c : Chips)
+    +getSummary() : String
+    +getValue() : double
+}
+
+class MeatSelection {
+    -type : MeatType
+    -extra : boolean
+    +getPrice(size : int) : double
+    +getDescription() : String
+}
+
+class CheeseSelection {
+    -type : CheeseType
+    -extra : boolean
+    +getPrice(size : int) : double
+    +getDescription() : String
+}
+
+enum BreadType {
+    WHITE
+    WHEAT
+    RYE
+    WRAP
+}
+
+enum MeatType {
+    STEAK
+    HAM
+    TURKEY
+    SALAMI
+    ROAST_BEEF
+    CHICKEN
+    BACON
+}
+
+enum CheeseType {
+    AMERICAN
+    PROVOLONE
+    CHEDDAR
+    SWISS
+}
+
+enum ToppingType {
+    LETTUCE
+    PEPPERS
+    ONIONS
+    TOMATOES
+    JALAPEÑOS
+    CUCUMBERS
+    PICKLES
+    GUACAMOLE
+    MUSHROOMS
+}
+
+enum SauceType {
+     MAYO
+     MUSTARD
+     KETCHUP
+     RANCH
+     BBQ
+     THOUSAND_ISLAND
+     VINAIGRETTE
+}
+
+enum ChipType {
+    CLASSIC
+    BARBECUE
+    SOUR_CREAM_AND_ONION
+    SALT_AND_VINEGAR
+    CHEDDAR_AND_SOUR_CREAM
+}
+
+' Relationships
+Valuable <|.. Sandwich
+Valuable <|.. Drink
+Valuable <|.. Chips
+
+Sandwich --> BreadType
+Sandwich --> MeatSelection
+Sandwich --> CheeseSelection
+Sandwich --> ToppingType
+Sandwich --> SauceType
+
+MeatSelection --> MeatType
+CheeseSelection --> CheeseType
+
+Chips --> ChipType
+
+Order --> Sandwich
+Order --> Drink
+Order --> Chips
+
+@enduml

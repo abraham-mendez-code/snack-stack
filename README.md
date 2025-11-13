@@ -39,22 +39,7 @@ It features clean UI menus, input validation, signature sandwich options, and a 
 
 ## 📂 **Project Structure**
 
-```
-SnackStack/
-├── src/main/java/com/pluralsight
-│   ├── models
-│   │   ├── Sandwich.java
-│   │   ├── Drink.java
-│   │   ├── Chips.java
-│   │   ├── Order.java
-│   │   ├── enums (BreadType, MeatType, CheeseType, etc.)
-│   │   └── Valuable.java
-│   ├── ui
-│   │   ├── UserInterface.java
-│   │   └── InputParser.java
-│   └── SnackStackApp.java
-└── README.md
-```
+![snack_stack-SnackStack_UML_Diagram.png](src/main/resources/diagrams/snack_stack-SnackStack_UML_Diagram.png)
 
 ---
 
@@ -197,6 +182,8 @@ Keeps the UI simple (only referencing display names)
 ![meattype.png](src/main/resources/images/meattype.png)
 ![breadtype.png](src/main/resources/images/breadtype.png)
 ---
+
+
 
 
 

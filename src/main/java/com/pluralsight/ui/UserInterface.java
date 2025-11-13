@@ -152,39 +152,39 @@ public class UserInterface {
                 | 1) The Classic Club                              |
                 |     Ham, Turkey, bacon, cheddar, lettuce,        |
                 |     tomato, and mayo on White Bread (Toasted).   |
-                |     Price: $16.50 (8")                            |
+                |     Price: $12.50 (8")                            |
                 |--------------------------------------------------|
                 | 2) Philly Supreme                                |
                 |     Steak, provolone, grilled onions, peppers,   |
                 |     and mushrooms on Wheat Bread (Toasted).      |
-                |     Price: $8.00 (8")                            |
+                |     Price: $10.50 (8")                            |
                 |--------------------------------------------------|
                 | 3) Italian Stallion                              |
                 |     Salami, ham, provolone, lettuce, tomato,     |
                 |     onion, vinaigrette, and Italian herbs on     |
                 |     White Bread (Toasted).                       |
-                |     Price: $7.75 (8")                            |
+                |     Price: $11.50 (8")                            |
                 |--------------------------------------------------|
                 | 4) Chicken Ranch Melt                            |
                 |     Grilled chicken, bacon, cheddar, lettuce,    |
                 |     tomato, and ranch on a Wrap (Toasted).       |
-                |     Price: $7.25 (8")                            |
+                |     Price: $11.50 (8")                            |
                 |--------------------------------------------------|
                 | 5) Veggie Delight                                |
                 |     Swiss cheese, cucumber, tomato, lettuce,     |
                 |     pickles, peppers, mushrooms, and vinaigrette |
                 |     on Wheat Bread (Toasted).                    |
-                |     Price: $6.50 (8")                            |
+                |     Price: $8.50 (8")                            |
                 |--------------------------------------------------|
                 | 6) BBQ Bacon Beast                               |
                 |     Roast beef, bacon, cheddar, onions, and      |
                 |     BBQ sauce on Rye Bread (Toasted).            |
-                |     Price: $8.25 (8")                            |
+                |     Price: $11.50 (8")                            |
                 |--------------------------------------------------|
                 | 7) Turkey Avocado Crunch                         |
                 |     Turkey, provolone, lettuce, tomato,          |
                 |     guacamole, and ranch on Wheat Bread (Toasted).|
-                |     Price: $7.75 (8")                            |
+                |     Price: $10.50 (8")                            |
                 |--------------------------------------------------|
                 | 8) Create Your Own Sandwich                      |
                 |     Build your own masterpiece by selecting      |
@@ -225,7 +225,7 @@ public class UserInterface {
                     );
 
                     philly.addMeat(MeatType.STEAK, false);
-                    philly.addCheese(CheeseType.PROVOLONE, true);
+                    philly.addCheese(CheeseType.PROVOLONE, false);
                     philly.addTopping(ToppingType.PEPPERS);
                     philly.addTopping(ToppingType.ONIONS);
                     philly.addTopping(ToppingType.MUSHROOMS);

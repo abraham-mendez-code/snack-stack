@@ -21,9 +21,9 @@ public class CheeseSelection {
         if (isExtra) {
             // add extra meat surcharge
             switch (size) {
-                case 4 -> price += 0.30;
-                case 8 -> price += 0.60;
-                case 12 -> price += 0.90;
+                case 4 -> price = 0.30;
+                case 8 -> price = 0.60;
+                case 12 -> price = 0.90;
             }
         }
 

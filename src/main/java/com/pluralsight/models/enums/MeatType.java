@@ -8,6 +8,7 @@ public enum MeatType {
     // STANDARD SINGLE MEAT PRICES
     STEAK("Steak", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
     HAM("Ham", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
+    TURKEY("TURKEY", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
     SALAMI("Salami", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
     ROAST_BEEF("Roast Beef", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),
     CHICKEN("Chicken", Map.of(4, 1.00, 8, 2.00, 12, 3.00)),

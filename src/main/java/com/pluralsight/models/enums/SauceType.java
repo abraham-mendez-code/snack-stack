@@ -5,6 +5,7 @@ public enum SauceType {
     MUSTARD("Mustard"),
     KETCHUP("Ketchup"),
     RANCH("Ranch"),
+    BBQ("BBQ"),
     THOUSAND_ISLAND("Thousand Island"),
     VINAIGRETTE("Vinaigrette");
 

@@ -129,15 +129,15 @@ public class Order implements Valuable {
 
         // Sum the value of each item in an order
         total += sandwiches.stream()
-                .mapToDouble(Valuable::getValue)
+                .mapToDouble(Sandwich::getValue)
                 .sum();
 
         total += drinks.stream()
-                .mapToDouble(Valuable::getValue)
+                .mapToDouble(Drink::getValue)
                 .sum();
 
         total += chips.stream()
-                .mapToDouble(Valuable::getValue)
+                .mapToDouble(Chips::getValue)
                 .sum();
 
         return total;

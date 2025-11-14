@@ -34,9 +34,9 @@ public class Drink implements Valuable {
     // this method returns a description of the drink
     public String getDescription() {
         String sizeStr = switch (size) {
-            case 1 -> "Small";
-            case 2 -> "Medium";
-            case 3 -> "Large";
+            case 4 -> "Small";
+            case 8 -> "Medium";
+            case 12 -> "Large";
             default -> "";
         };
 

@@ -3,7 +3,6 @@ package com.pluralsight.models;
 import com.pluralsight.models.enums.BreadType;
 import com.pluralsight.models.enums.CheeseType;
 import com.pluralsight.models.enums.MeatType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,13 +22,14 @@ class SandwichTest {
         Sandwich basicSandwich = new Sandwich(BreadType.WHITE, 4, false);
 
         // ACT
-        double actualTotal = basicSandwich.getValue();
         basicSandwich.addMeat(MeatType.CHICKEN, false);
         basicSandwich.addCheese(CheeseType.CHEDDAR, false);
+
+        double actualTotal = basicSandwich.getValue();
         double expectedTotal = BreadType.WHITE.getPriceForSize(4) + MeatType.CHICKEN.getPriceForSize(4) + CheeseType.CHEDDAR.getPriceForSize(4);
 
         // ASSERT
-        Assertions.assertEquals(actualTotal, expectedTotal);
+        assertEquals(actualTotal, expectedTotal);
     }
 
 

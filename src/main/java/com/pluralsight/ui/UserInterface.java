@@ -401,13 +401,13 @@ public class UserInterface {
 
             switch (input) {
                 case "small":
-                    size = 1;
+                    size = 4;
                     break;
                 case "medium":
-                    size = 2;
+                    size = 8;
                     break;
                 case "large":
-                    size = 3;
+                    size = 12;
                     break;
                 default:
                     System.out.println("Invalid selection");
